@@ -1,4 +1,6 @@
 /** WIZ-Flow 모달 — BEFORE vs AFTER 대시보드 토글 KPI 카드 */
+import { publicAssetPath } from '../utils/publicAsset';
+
 export interface WizFlowKpiCard {
   badgePct: string;
   category: string;
@@ -176,7 +178,7 @@ export const solutions: Solution[] = [
     client: 'lg',
     isDemoAvailable: true,
     demoUrl: 'https://wiz-factory.net/project/lg-pfos/auth/signin/?demo=pfos',
-    brochurePdf: '/brochures/wiz-flow-intro-16x9.pdf',
+    brochurePdf: publicAssetPath('/brochures/wiz-flow-intro-16x9.pdf'),
     industry: 'Electronics / Manufacturing',
     industryEn: 'Electronics / Manufacturing',
     detailedDescription: 'LG전자 생산현장의 종이 문서를 완전 디지털화하여 실시간 작업지시·공정 추적·통합 모니터링으로 스마트팩토리 운영 효율을 극대화하는 핵심 솔루션입니다.',

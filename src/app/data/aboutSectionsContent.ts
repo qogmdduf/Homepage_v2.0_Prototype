@@ -4,7 +4,7 @@
  */
 
 import type { AboutPageLang } from './aboutPageContent';
-import { aboutPptAssetBase } from './aboutPageContent';
+import { aboutCeoPortrait1, aboutPptAssetBase } from './aboutPageContent';
 
 export type CaseIndustry = 'manufacturing' | 'ai-vision' | 'platform';
 
@@ -543,7 +543,7 @@ export const aboutSections: Record<AboutPageLang, AboutSectionsBundle> = {
         '위즈팩토리는 제조 현장의 데이터를 연결하고, 실행 가능한 소프트웨어로 경영과 현장의 간격을 좁히는 일에 집중합니다.\n\nLG전자에서 대기업 전사 시스템을 오랜 기간 총괄하며 체득한 운영·품질·일정 관리의 기준을 바탕으로, 고객과 파트너와의 신뢰를 최우선으로 합니다.\n\n스마트팩토리 도입이 단순한 시스템 구축이 아니라 지속 가능한 경쟁력이 되도록, 끝까지 책임지는 파트너가 되겠습니다.',
       ceoGreetingName: '배흥열',
       ceoGreetingRole: '대표이사',
-      ceoGreetingImage: '/about/ceo-portrait1.png',
+      ceoGreetingImage: aboutCeoPortrait1,
       ceoGreetingImageAlt: '주식회사 위즈팩토리 대표이사 배흥열',
       businessTitle: '사업 개요',
       businessLead:
@@ -1203,7 +1203,7 @@ export const aboutSections: Record<AboutPageLang, AboutSectionsBundle> = {
         'We focus on connecting manufacturing data and closing the gap between management and the shop floor with software you can run.\n\nDrawing on years leading large enterprise programs at LG Electronics, we put trust with customers and partners first.\n\nSmart factory adoption should build lasting competitiveness—not just install systems—and we commit as a partner who stays accountable.',
       ceoGreetingName: 'Bae Heung-yeol',
       ceoGreetingRole: 'Chief Executive Officer',
-      ceoGreetingImage: '/about/ceo-portrait1.png',
+      ceoGreetingImage: aboutCeoPortrait1,
       ceoGreetingImageAlt: 'Bae Heung-yeol, CEO of WIZFACTORY Co., Ltd.',
       businessTitle: 'What we do',
       businessLead:

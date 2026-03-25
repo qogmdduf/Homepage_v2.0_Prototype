@@ -19,6 +19,7 @@ import {
 import { useLanguage } from '../../contexts/LanguageContext';
 import { getAboutSections } from '../../data/aboutSectionsContent';
 import { AboutCtaBand } from '../../components/about/AboutPageUi';
+import { publicAssetPath } from '../../utils/publicAsset';
 
 /* ─── Phase visual config ────────────────────────────────────────────── */
 const PHASE_ICONS = [Search, Layers, Code2, Rocket, Settings] as const;
@@ -375,7 +376,7 @@ export function AboutProcessPage() {
             className="mt-12 overflow-hidden rounded-2xl border border-white/[0.08]"
           >
             <img
-              src="/about/20250901/sections/06-technology/01-page-08.png"
+              src={publicAssetPath('/about/20250901/sections/06-technology/01-page-08.png')}
               alt={isKo ? '기술 아키텍처' : 'Technology architecture'}
               className="w-full object-cover"
               loading="lazy"
