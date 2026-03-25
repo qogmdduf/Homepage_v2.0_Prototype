@@ -1,0 +1,85 @@
+@import './fonts.css';
+@import './tailwind.css';
+@import './theme.css';
+
+/* iOS Safe Area Support */
+:root {
+  --safe-area-inset-top: env(safe-area-inset-top);
+  --safe-area-inset-bottom: env(safe-area-inset-bottom);
+  --safe-area-inset-left: env(safe-area-inset-left);
+  --safe-area-inset-right: env(safe-area-inset-right);
+  /**
+   * Header.tsx: paddingTop(safe-area) + h-[52px] nav row + 1px border-bottom.
+   * 솔루션 상세 등 본문 패딩과 sticky offset을 동일 값으로 맞출 때 사용.
+   */
+  --app-header-offset: calc(env(safe-area-inset-top, 0px) + 52px + 1px);
+}
+
+/* Ensure viewport-fit=cover is set for iOS devices */
+html {
+  min-height: 100%;
+  min-height: -webkit-fill-available;
+}
+
+body {
+  min-height: 100vh;
+  min-height: -webkit-fill-available;
+}
+
+/* WIZ-Flow 프로세스 맵 React Flow — 부모 카드와 한 겹으로 보이도록 패널 배경 투명 */
+.wiz-flow-key-outcome-flow .react-flow__pane,
+.wiz-flow-key-outcome-flow .react-flow__renderer {
+  background: transparent !important;
+}
+
+/* 우하단 React Flow 어트리뷰션(링크) — proOptions와 함께 이중으로 숨김 */
+.wiz-flow-key-outcome-flow .react-flow__attribution {
+  display: none !important;
+}
+
+/**
+ * WIZ-Flow 모달 — 모바일에서 리모컨+TV를 제품 컷처럼 축소 (TV 미리보기 느낌).
+ * WebKit/Blink: zoom으로 레이아웃까지 축소. Firefox: zoom 미지원 시 scale + 폭 보정.
+ */
+.wiz-flow-tv-scale-mobile {
+  transform-origin: top center;
+}
+@media (max-width: 639px) {
+  .wiz-flow-tv-scale-mobile {
+    zoom: 0.62;
+  }
+}
+@media (max-width: 639px) {
+  @supports not (zoom: 1) {
+    .wiz-flow-tv-scale-mobile {
+      zoom: unset;
+      display: block;
+      width: 161.3%;
+      transform: scale(0.62);
+      margin-left: -30.65%;
+      /* 시각 높이 축소만큼 아래 빈 공간 완화 */
+      margin-bottom: clamp(-12rem, -48vw, -4rem);
+    }
+  }
+}
+
+/* ── About / CEO 인사말 — 편집형 흑백 톤(그레이스케일 + 대비·톤) ── */
+.about-ceo-portrait-cutout {
+  margin: 0;
+  line-height: 0;
+}
+.about-ceo-portrait-cutout-img {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: min(72vh, 620px);
+  margin-inline: auto;
+  object-fit: contain;
+  object-position: bottom center;
+  filter: grayscale(100%) contrast(1.12) brightness(0.96);
+}
+@supports (filter: grayscale(1)) {
+  .about-ceo-portrait-cutout-img {
+    -webkit-filter: grayscale(100%) contrast(1.12) brightness(0.96);
+  }
+}

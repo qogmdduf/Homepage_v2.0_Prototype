@@ -1,0 +1,24 @@
+{
+  "sourcePdf": "source/20250901_wizfactory_company_profile.pdf",
+  "originalFilename": "[웹용]20250901_위즈팩토리_회사소개서.pdf",
+  "pageCount": 21,
+  "dpi": 144,
+  "folders": {
+    "fullPages": "full-pages/page-{nn}.png (01–21)",
+    "sections": "sections/{id}/ — PDF 목차·본문 기준으로 페이지를 묶었습니다. 웹 About 섹션과 1:1이 아닐 수 있어 full-pages로 확인 후 조정하세요.",
+    "embedded": "embedded/page-{nn}/ — 해당 페이지에서 추출한 비트맵(3KB 미만 노이즈 제거). 벡터 도형은 full-pages에만 있습니다."
+  },
+  "sections": [
+    { "id": "01-cover", "pages": [1], "pdfOutline": "표지" },
+    { "id": "02-contents", "pages": [2], "pdfOutline": "Contents" },
+    { "id": "03-prologue", "pages": [3], "pdfOutline": "Prologue" },
+    { "id": "04-company-overview", "pages": [4, 5, 6], "pdfOutline": "01. 회사소개" },
+    { "id": "05-history", "pages": [7], "pdfOutline": "02. 회사연혁" },
+    { "id": "06-technology", "pages": [8, 9], "pdfOutline": "03. 테크놀로지" },
+    { "id": "07-solution", "pages": [10, 11, 12, 13, 14, 15, 16], "pdfOutline": "04. 솔루션" },
+    { "id": "08-hardware-device", "pages": [17, 18], "pdfOutline": "05. 하드웨어·디바이스" },
+    { "id": "09-clients-partners", "pages": [19], "pdfOutline": "06. 클라이언트·파트너" },
+    { "id": "10-certifications", "pages": [20], "pdfOutline": "07. 인증" },
+    { "id": "11-closing", "pages": [21], "pdfOutline": "맺음/뒷면" }
+  ]
+}

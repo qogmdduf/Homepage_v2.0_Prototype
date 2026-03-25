@@ -1,0 +1,114 @@
+/* ═══════════════════════════════════════════════════════════════════════════════
+   WIZFACTORY — Typography System
+   ───────────────────────────────────────────────────────────────────────────────
+   Strategy
+   ┌─ Inter Variable   → Latin · Numeral · Symbol · Punctuation
+   └─ Pretendard Var.  → Korean (Hangul) · Latin fallback
+
+   Philosophy
+   · Variable fonts only  — 단일 파일로 전체 weight 축(100–900) 커버, 네트워크 절약
+   · Dynamic subset       — Pretendard CDN이 요청 페이지의 글자만 잘라 전달 (WOFF2)
+   · font-display: swap   — FOIT 제거, 텍스트 즉시 노출 후 폰트 교체
+   · Fallback @font-face  — ascent/descent/size-adjust 보정으로 CLS(레이아웃 이동) 최소화
+   · unicode-range        — 언어별 글리프 담당 폰트를 브라우저에 명시 → 불필요한 폰트 미로드
+
+   Performance tip (HTML <head>에 추가하면 TTFB 단축):
+   <link rel="preconnect" href="https://fonts.googleapis.com">
+   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+   <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+   ═══════════════════════════════════════════════════════════════════════════════ */
+
+
+/* ── 1. Inter Variable ─────────────────────────────────────────────────────────
+   · opsz (Optical Size) 축 포함 → 작은 크기/큰 크기 자동 자형 최적화
+   · wght 100–900 가변 → font-weight 어디든 사용 가능
+   · italic 축 포함
+   · ⚡ 로드: index.html <head>에서 <link rel="stylesheet">로 즉시 로드
+   ───────────────────────────────────────────────────────────────────────────── */
+
+/* ── 2. Pretendard Variable · Dynamic Subset ───────────────────────────────────
+   · 페이지에 실제 존재하는 글자만 slice 전달 → 한글 폰트 로딩 부담 최소화
+   · wght 100–900 가변
+   · ⚡ 로드: index.html <head>에서 <link rel="stylesheet">로 즉시 로드
+   ───────────────────────────────────────────────────────────────────────────── */
+
+
+/* ── 3. unicode-range 기반 글리프 담당 명시 ────────────────────────────────────
+   브라우저는 font-family 스택을 순서대로 탐색하되, 해당 글자의 unicode-range를
+   담당하는 폰트를 우선 선택한다. 아래 @font-face는 "어떤 범위를 누가 담당하는지"
+   를 명시적으로 선언해 불필요한 fallback 탐색을 없앤다.
+   ───────────────────────────────────────────────────────────────────────────── */
+
+/* Inter → Latin · Extended Latin · Numerals · Punctuation · Symbols */
+@font-face {
+  font-family: 'Wiz Sans';
+  src: local('Inter'),
+       url('https://fonts.gstatic.com/s/inter/v13/UcCO3FwrK3iLTeHuS_fvQtMwCp50KnMw2boKoduKmMEVuLyfAZ9hiJ-Ek-_EeA.woff2') format('woff2');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+  unicode-range:
+    U+0000-00FF,   /* Basic Latin + Latin-1 Supplement */
+    U+0100-024F,   /* Latin Extended-A/B */
+    U+0250-02AF,   /* IPA Extensions */
+    U+0300-036F,   /* Combining Diacritical Marks */
+    U+0370-03FF,   /* Greek */
+    U+2000-206F,   /* General Punctuation */
+    U+2070-209F,   /* Superscripts & Subscripts */
+    U+20A0-20CF,   /* Currency Symbols */
+    U+2100-214F,   /* Letterlike Symbols */
+    U+2150-218F,   /* Number Forms */
+    U+2190-21FF,   /* Arrows */
+    U+2200-22FF,   /* Mathematical Operators */
+    U+25A0-25FF,   /* Geometric Shapes */
+    U+2600-26FF,   /* Miscellaneous Symbols */
+    U+FE50-FE6F,   /* Small Form Variants */
+    U+FF00-FFEF;   /* Halfwidth & Fullwidth Forms */
+}
+
+/* Pretendard → Hangul · Korean Compatibility Jamo */
+@font-face {
+  font-family: 'Wiz Sans';
+  src: local('Pretendard Variable'),
+       url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+  unicode-range:
+    U+AC00-D7AF,   /* Hangul Syllables (가–힣) */
+    U+1100-11FF,   /* Hangul Jamo */
+    U+302E-302F,   /* Hangul Tone Marks */
+    U+3130-318F,   /* Hangul Compatibility Jamo */
+    U+A960-A97F,   /* Hangul Jamo Extended-A */
+    U+D7B0-D7FF;   /* Hangul Jamo Extended-B */
+}
+
+
+/* ── 4. Fallback @font-face — CLS 방지 메트릭 보정 ────────────────────────────
+   폰트 로드 전 시스템 폰트(Arial / Apple SD Gothic Neo)가 화면에 표시될 때
+   레이아웃이 얼마나 달라지는지를 미리 보정해 Cumulative Layout Shift를 줄인다.
+   ascent/descent/size-adjust 값은 각 폰트의 실측 UPM 메트릭 기반.
+   ───────────────────────────────────────────────────────────────────────────── */
+
+/* Inter의 fallback: Arial 기반 메트릭 보정 */
+@font-face {
+  font-family: 'Inter Fallback';
+  src: local('Arial');
+  ascent-override:   90.20%;
+  descent-override:  22.48%;
+  line-gap-override:  0.00%;
+  size-adjust:       107.40%;
+}
+
+/* Pretendard의 fallback: 시스템 한글 폰트 메트릭 보정 */
+@font-face {
+  font-family: 'Pretendard Fallback';
+  src: local('Apple SD Gothic Neo'),
+       local('Malgun Gothic'),
+       local('Nanum Gothic'),
+       local('sans-serif');
+  ascent-override:   95.00%;
+  descent-override:  25.00%;
+  line-gap-override:  0.00%;
+  size-adjust:       100.00%;
+}
